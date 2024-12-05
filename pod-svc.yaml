@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-site
+  labels:
+    myapp: abhijit
+spec:
+  containers:
+  - name: my-container
+    image: abhijitramteke/myhtml-site:03
+    ports:  
+      - containerPort: 80   #while expose service we add more space in this fileld
+        name: my-port    #container name should be in numeric (-) not space 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc
+spec:
+  type: NodePort
+  selector:
+    myapp: abhijit
+  ports:
+  - name: myport-svc
+    protocol: TCP
+    port: 80
+    targetPort: my-port  
